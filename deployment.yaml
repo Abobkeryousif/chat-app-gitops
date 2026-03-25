@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-app
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: chat-app
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: chat-app
+    spec:
+      imagePullSecrets:
+        - name:  ghcr-
+      containers:
+        - name: chat-app-container
+          image: ghcr.io/abobkeryousif/chat-app:latest
+          ports:
+            - containerPort: 8080
+      resources:
+        limits:
+          memory: "300Mi" 
+          cpu: "500m"
+        requests:
+          memory: "200Mi"
+          cpu: "350m"
+
+---
+
+apiVersion:  v1
+kind: Service
+metadata:
+  name:  chat-app-service
+  namespace:  default
+spec:
+    selector:
+      app:  chat-app
+    ports:
+      - port: 80
+        targetPort:  8080
+    type: ClusterIP
