@@ -8,7 +8,6 @@ spec:
   selector:
     matchLabels:
       app: chat-app
-
   strategy:
     type: RollingUpdate
     rollingUpdate:
