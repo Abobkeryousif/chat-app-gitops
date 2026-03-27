@@ -22,7 +22,7 @@ spec:
         - name:  ghcr-secret
       containers:
         - name: chat-app-container
-          image: ghcr.io/abobkeryousif/simple_chat_app:8a2fc95a6bff3f673cbc41ba5f9d3f0ced755c48
+          image: ghcr.io/abobkeryousif/simple_chat_app:2562c1c30ba08e5dad9b1d3be28a2bb2cfbee64a
           ports:
             - containerPort: 8080
       resources:
